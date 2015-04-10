@@ -50,21 +50,21 @@ while(entered42 === false)
 //Part 4
 console.log("You are about to be asked to enter 10 numbers!");
 var countOfNumbersToEnter = 10;
-var maxNumber = -1;
+var lessNumber = -1;
 for(var count = 1; count <= countOfNumbersToEnter; count++)
 {
     enteredString = inputReader.question("Please enter number " + count + ": ");
     enteredNumber = parseInt(enteredString);
     if(count === 1)
     {
-        maxNumber = enteredNumber;
+        lessNumber = enteredNumber;
     }
-    else if(enteredNumber > maxNumber)
+    else if(enteredNumber < lessNumber)
     {
-        maxNumber = enteredNumber;
+        lessNumber = enteredNumber;
     }
 }
-console.log("This was the largest number you entered: " + maxNumber);
+console.log("This was the smallest number you entered: " + lessNumber);
 
 
 
