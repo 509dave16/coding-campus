@@ -108,36 +108,51 @@ var quadraticEquation = function(a,b,c)
 function mostFrequentLetter(string)
 {
 
+    //Convert string to lowercase so that all letters are in the ASCII range of 97-122 
     var string = string.toLowerCase();
+    //Array to track the count of each letter
     var letterCounters = [];
+    //Number to index into letterCounters array
     var letterCounterIndex = 0;
+    //Traverse the string to count each letter
     for(var stringIndex = 0; stringIndex < string.length; stringIndex++)
     {
+        //Convert character to character code(i.e. ASCII code)
         var charCode = string.charCodeAt(stringIndex);
+        //Lowercase letters in ASCII are between 97 and 122
         if(charCode >= 97 && charCode <= 122)
         {
+            //Mapp the position of the letter in the alphabet by subtracting 97(ie a => 97 => 0)
             letterCounterIndex = charCode - 97;
+            //If we haven't set up a counter, we need to initialize that value at the index to 0
             if( typeof letterCounters[letterCounterIndex] === "undefined")
             {
                 letterCounters[letterCounterIndex] = 0;
             }
+            //Increment counter at index
             letterCounters[letterCounterIndex] += 1;
         }
     }
-    
+    //Variable to keep track of the largest letter count encountered in our letterCounters array
     var maxCount = 0;
+    //Variable to keep track of the index of the largest letter count encountered in our letterCounters array
     var maxCountIndex = 0;
+    //Traverse the letterCounters array to find the largest letter count
     for(letterCounterIndex = 0; letterCounterIndex < letterCounters.length; letterCounterIndex++)
     {
+        //Check to see if letter counter index exist(i.e. if z wasn't in string, value would be undefined at index 25)
         if(typeof letterCounters[letterCounterIndex] !== "undefined")
         {
-            var count = letterCounters[letterCounterIndex]
+            //Retrieve count
+            var count = letterCounters[letterCounterIndex];
+            //First letter count is considered to be largest
             if(letterCounterIndex === 0)
             {
                 maxCount = count;
             }
             else
             {
+                //Check to see if new count encountered is larger than the max count
                 if(count > maxCount)
                 {
                     maxCount = count;
@@ -146,6 +161,8 @@ function mostFrequentLetter(string)
             }
         }
     }
+    //Found the largest letter counter so use index of counter to get back to letter.
+    //(i.e. 0 + 97 => 97 => a)
     return String.fromCharCode(maxCountIndex + 97);
 }
 
