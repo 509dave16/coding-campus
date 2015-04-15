@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function outputCheckedBoxValues()
+            {
+                var output = '';
+                var elements = document.getElementById('checkBoxForm').elements;
+                for(var elementIndex = 0; elementIndex < elements.length; elementIndex++)
+                {
+                    var element = elements[elementIndex];
+                    if(element.type === 'checkbox' && element.checked === true)
+                    {
+                        output += element.value + "<br>";
+                    }
+                } 
+                document.getElementById('checkboxValues').innerHTML = output;
+            }
+        </script>
+    </head>
+    <body>
+        <form id="checkBoxForm">
+            <input type="checkbox" value="Zero" />Zero
+            <br>
+            <input type="checkbox" value="One"/>One
+            <br>
+            <input type="checkbox" value="Two"/>Two
+            <br>
+            <input type="button" value="Submit" onclick="outputCheckedBoxValues()"/>
+        </form>
+        <div id="checkboxValues"></div>
+    </body>
+</html>
