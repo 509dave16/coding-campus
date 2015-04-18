@@ -7,17 +7,17 @@ function Point(row, column)
     
     this.markPoint = function()
     {
-        var result = "Point Already Hit";
+        var action = " hit an already targeted point.";
         if(_marker === "U")
         {
-            result = "Miss";
+            action = " missed.";
             _marker = _ship !== undefined ? "X" : "O";
             if(_marker === "X")
             {
-                result = _ship.checkForDestruction();
+                action = _ship.checkForDestruction();
             }
         }
-        return result;
+        return action;
     };
     
     this.setShip = function(ship)
@@ -38,6 +38,11 @@ function Point(row, column)
     this.getColumn = function()
     {
         return _column;
+    };
+    
+    this.getMarker = function()
+    {
+       return _marker;  
     };
 }
 

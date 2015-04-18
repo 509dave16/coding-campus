@@ -20,19 +20,67 @@ function BattleshipUtiity()
     
     this.generateShips = function(pointGrid, numOfShips,minShipLength,maxShipLength)
     {
+        if(isGridJagged(pointGrid))
+        {
+            console.log("Grid was jagged. Only non-jagged grids are allowed.");
+            return;
+        }
+        if(gridAvailabilityValidation(pointGrid.length, pointGrid[0].length,numOfShips,maxShipLength) === false)
+        {
+            console.log("Grid did not have enough available points.");
+            return;
+        }
         var sourcePoint = undefined;
         var shipPoints = undefined;
         var ships = [];
         while(ships.length !== numOfShips)
         {
             sourcePoint = randomSourcePoint(pointGrid);
-            shipPoints = pointsPath(pointGrid, sourcePoint, minShipLength, maxShipLength);
-            if(shipPoints !== undefined)
+            //Check for the case when no source point for a ship could be found.
+            if(sourcePoint !== undefined)
             {
-                ships.push(new Ship(shipPoints));
+                shipPoints = pointsPath(pointGrid, sourcePoint, minShipLength, maxShipLength);
+                if(shipPoints !== undefined)
+                {
+                    var ship = new Ship(shipPoints);
+                    ships.push(ship);
+                    for(var shipPointIndex = 0 ; shipPointIndex < shipPoints.length; shipPointIndex++)
+                    {
+                       var point = shipPoints[shipPointIndex];
+                       point.setShip(ship);
+                    }
+                }
             }
         }
+        return ships;
     };
+    
+    function gridAvailabilityValidation(rows,columns,numOfEntites,maxEntitySize)
+    {
+        var availablePoints = rows * columns;
+        var pointsNeeded = numOfEntites * maxEntitySize;
+        return availablePoints >= pointsNeeded ? true : false;
+    }
+    
+    function isGridJagged(grid)
+    {
+        var iniitalColumnCount = 0;
+        var isJagged = false;
+        for(var rowIndex = 0; rowIndex < grid.length; rowIndex++)
+        {
+            var row = grid[rowIndex];
+            if(rowIndex === 0)
+            {
+                iniitalColumnCount = row.length;
+            }
+            else if(iniitalColumnCount !== row.length)
+            {
+                isJagged = true;
+                break;
+            }
+        }
+        return isJagged;
+    }
     
     //Note may need alternate version
     function randomSourcePoint(pointGrid)
@@ -93,13 +141,24 @@ function BattleshipUtiity()
         var rowIndex = sourcePoint.getRow();
         var columnIndex = sourcePoint.getColumn();
         var point = undefined;
-        var length = 0;
         var reachedMinumThreshold = true;
+        var chanceThresholdDecrement = ( ( 100/maxLength ) * 0.01 );
+        var chanceThreshold = 1;
         var points = [];
     
         for(; (rowIndex < pointGrid.length && rowIndex > -1) && (points.length <= maxLength); rowIndex += directionIncrement)
         {
             point = pointGrid[rowIndex][columnIndex];
+            var chance = Math.random();
+            if(points.length >= minLength && (chance > chanceThreshold))
+            {
+                break;
+            }
+            else
+            {
+                chanceThreshold -= chanceThresholdDecrement;
+            }
+            
             if(!point.hasShip())
             {
                 points.push(point);
@@ -127,12 +186,23 @@ function BattleshipUtiity()
         var columnIndex = sourcePoint.getColumn();
         var row = pointGrid[rowIndex];
         var point = undefined;
-        var length = 0;
         var reachedMinumThreshold = true;
+        var chanceThresholdDecrement = ( ( 100/maxLength ) * 0.01 );
+        var chanceThreshold = 1;
         var points = [];
         for(; (columnIndex < row.length && columnIndex > -1) && (points.length <= maxLength); columnIndex += directionIncrement)
         {
             point = row[columnIndex];
+            var chance = Math.random();
+            if(points.length >= minLength && (chance > chanceThreshold))
+            {
+                break;
+            }
+            else
+            {
+                chanceThreshold -= chanceThresholdDecrement;
+            }
+            
             if(!point.hasShip())
             {
                 points.push(point);
