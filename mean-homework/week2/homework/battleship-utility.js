@@ -153,13 +153,13 @@ function BattleshipUtiity()
     
     /**
      * This method determines randomly a viable Points path for a Ship object in
-     * either an Up, Left, Down, or Right direction on the Point grid within certain constraints.
+     * either an Up, Left, Down, or Right direction within the bounds of the Point grid.
      * 
      * @param {Point[][]} pointGrid A 2D Point Array
      * @param {Point} sourcePoint The source Point of the Points path for a Ship
      * @param {number} minLength The minimum length of a Ship
      * @param {number} maxLength The maximum length of a Ship
-     * @return {Point[]} A Point Array represents the Points path for a Ship
+     * @return {Point[]} A Point Array representing the Points path for a Ship
      */
     function pointsPath(pointGrid, sourcePoint, minLength, maxLength)
     {
@@ -204,13 +204,13 @@ function BattleshipUtiity()
     
     /**
      * This method traverse the elements at specific index/column of the nested Point Arrays
-     * to create a path of Points for a Ship if possible.
+     * to create a path of Points for a Ship if possible in either an up or down direction.
      * 
      * @param {Point[][]} pointGrid A 2D Point Array
      * @param {Point} sourcePoint A source Point for the Points path of a Ship
      * @param {number} minLength The minimum length of a Ship
      * @param {number} maxLength The maximum length of a Ship
-     * @return {Point[]} A Point Array represents the Points path for a Ship
+     * @return {Point[]} A Point Array representing the Points path for a Ship
      */
     function traverseGridColumn(pointGrid, sourcePoint, minLength, maxLength, directionIncrement)
     {
@@ -258,13 +258,13 @@ function BattleshipUtiity()
     
     /**
      * This method traverse the elements of specific row(nested Point Array)
-     * to create a path of Points for a Ship if possible.
+     * to create a path of Points for a Ship if possible in either a left or right direction.
      * 
      * @param {Point[][]} pointGrid A 2D Point Array
      * @param {Point} sourcePoint A source Point for the Points path of a Ship
      * @param {number} minLength The minimum length of a Ship
      * @param {number} maxLength The maximum length of a Ship
-     * @return {Point[]} A Point Array represents the Points path for a Ship
+     * @return {Point[]} A Point Array representing the Points path for a Ship
      */
     function traverseGridRow(pointGrid, sourcePoint, minLength, maxLength, directionIncrement)
     {
@@ -309,6 +309,87 @@ function BattleshipUtiity()
         }
         return undefined;
     }
+    
+    /**
+     * This function calls the mark() method of every Point object in the 2D Array.
+     * 
+     * @param {Point[][]} pointGrid a 2D Array that is to be traversed
+     * @return {undefined}
+     */
+    function markAllPoints(pointGrid)
+    {
+        for(var rowIndex = 0; rowIndex < pointGrid.length; rowIndex++)
+        {
+            var row = pointGrid[rowIndex];
+            for(var columnIndex = 0; columnIndex < row.length; columnIndex++)
+            {
+                var point = pointGrid[rowIndex][columnIndex];
+                point.mark();
+            }
+        }
+    }
+    
+    /**
+     * This function prints the contents of a 2D Array.
+     * 
+     * @param {Point[][]} grid a 2D Array that is to be printed
+     * @returns {undefined}
+     */
+    this.printGrid = function (grid)
+    {
+      //
+      var outputLines = "";
+      //Traverse rows
+      for(var rowIndex = 0; rowIndex < grid.length; rowIndex++)
+      {
+        var row = grid[rowIndex];
+        if(rowIndex === 0)
+        {
+            outputLines += "    ";
+            for(var columnIndex = 0; columnIndex < row.length; columnIndex++)
+            {
+                outputLines += columnIndex + " ";
+            }
+            outputLines += "\n";
+        }
+        var outputLine = "";
+        outputLine += rowIndex + " | ";
+        //Traverse columns in a row
+        for(columnIndex = 0; columnIndex < row.length; columnIndex++)
+        {
+           //Retrive the array that contains the values of the column and row index
+           var point = row[columnIndex];
+           outputLine += point.getMarker();
+           if(columnIndex != row.length - 1)
+           {
+               outputLine += " ";
+           }
+        }
+        outputLine += " |";
+        if(rowIndex !== (grid.length -1))
+        {
+          outputLine += "\n";
+        }
+        outputLines += outputLine;
+       
+      }
+      console.log(outputLines);
+    };
+    
+    /**
+     * This function prints the Point objects of each Ship object
+     * 
+     * @param {Ship[]} ships An array of Ship objects
+     * @return {undefined}
+     */
+    this.printShips = function (ships)
+    {
+        for(var shipIndex = 0; shipIndex < ships.length; shipIndex++)
+        {
+            var ship = ships[shipIndex];
+            ship.printPoints();
+        }
+    };
 }
 
 module.exports = BattleshipUtiity;
