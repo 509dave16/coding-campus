@@ -7,17 +7,13 @@ function Ship(points)
         _numOfPointsDestroyed++;
         return _numOfPointsDestroyed === _points.length ? "destroyed a Ship." : "hit a Ship.";
     };
-    //observePoints();
-
-    function observePoints()
-    {
-        for(var pointIndex = 0; pointIndex < _points.length; pointIndex++)
-        {
-            var point = _points[pointIndex];
-            point.setShip(this);
-        }
-    }
     
+    /**
+     * This method is meant for testing the functionality of the BattleShip program
+     * by seeing on which Points Ships were generated
+     * 
+     * @return {undefined}
+     */
     this.printPoints = function ()
     {
         var output = "[ ";

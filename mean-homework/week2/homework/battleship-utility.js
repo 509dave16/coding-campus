@@ -1,9 +1,26 @@
 
 function BattleshipUtiity()
 {
-    var Ship = require("./ship.js")
+    var Ship = require("./ship.js");
     var Point = require("./point.js");
+    var generatePermutations = require("./permutations.js");
+    //Array of indices for indexing into the directions Array
+    var directionIndices = [0,1,2,3];
+    //0 Up, 1 Left, 2 Down, 3 Right
+    var directions = [-1,-1,1,1];
+    //This variable will hold all the possible permutations of the 4 directions
+    //to check when creating the Points path for a Ship.
+    var directionIndexPermutations = generatePermutations(directionIndices);
+    //Number for indexing into the Array of direction permutation sets.
+    var permutationIndex = 0;
     
+    /**
+     * This method generates a 2D Point Array.
+     * 
+     * @param {number} rows This determines the height of the grid as well as how many nested arrays will be instantiated
+     * @param {number} columns This determines the width of the grid as well as how many elements a nested array will have
+     * @return {Point[][]) a 2D Point Array
+     */
     this.generatePointGrid = function(rows, columns)
     {
         var grid = [];
@@ -18,6 +35,12 @@ function BattleshipUtiity()
         return grid;
     };
     
+    /**
+     * This method generates the Ship objects that will cover Points of the grid.
+     * 
+     * @param {Point[][]} pointGrid A 2D Point Array
+     * @return {Ship[]} A Ship Array representing the created ships.
+     */
     this.generateShips = function(pointGrid, numOfShips,minShipLength,maxShipLength)
     {
         if(isGridJagged(pointGrid))
@@ -37,24 +60,36 @@ function BattleshipUtiity()
         {
             sourcePoint = randomSourcePoint(pointGrid);
             //Check for the case when no source point for a ship could be found.
-            if(sourcePoint !== undefined)
+            if(sourcePoint === undefined)
             {
-                shipPoints = pointsPath(pointGrid, sourcePoint, minShipLength, maxShipLength);
-                if(shipPoints !== undefined)
+                ships = undefined;
+                break;   
+            }
+            shipPoints = pointsPath(pointGrid, sourcePoint, minShipLength, maxShipLength);
+            if(shipPoints !== undefined)
+            {
+                var ship = new Ship(shipPoints);
+                ships.push(ship);
+                for(var shipPointIndex = 0 ; shipPointIndex < shipPoints.length; shipPointIndex++)
                 {
-                    var ship = new Ship(shipPoints);
-                    ships.push(ship);
-                    for(var shipPointIndex = 0 ; shipPointIndex < shipPoints.length; shipPointIndex++)
-                    {
-                       var point = shipPoints[shipPointIndex];
-                       point.setShip(ship);
-                    }
+                   var point = shipPoints[shipPointIndex];
+                   point.setShip(ship);
                 }
             }
         }
         return ships;
     };
     
+    /**
+     * This method checks to see if the possible number of Points
+     * that would be needed for the ships is greater than the Points of the grid
+     * 
+     * @param {number} rows The height and number of nested Point Arrays
+     * @param {number} columns The width and length of the nested Point Arrays
+     * @param {number} numOfEntities This number indicates how Ships that are to be created
+     * @param {number} maxEntitySize This number indicates how long a Ship can be
+     * @return {boolean} This indicates if there is or isn't enough Points in the 2D Array
+     */
     function gridAvailabilityValidation(rows,columns,numOfEntites,maxEntitySize)
     {
         var availablePoints = rows * columns;
@@ -62,6 +97,12 @@ function BattleshipUtiity()
         return availablePoints >= pointsNeeded ? true : false;
     }
     
+    /**
+     * This method checks to see if the 2D Point Array is jagged.
+     * 
+     * @param {Point[][]} grid The 2D Point Array
+     * @return {boolean} Indicates if the grid is jagged or not
+     */
     function isGridJagged(grid)
     {
         var iniitalColumnCount = 0;
@@ -82,7 +123,12 @@ function BattleshipUtiity()
         return isJagged;
     }
     
-    //Note may need alternate version
+    /**
+     * This method attempts to find a source Point for a Ship
+     * 
+     * @param {Pointp[][]} pointGrid A 2D Point Array
+     * @return {Point} The point that will act as the source for a Ship
+     */
     function randomSourcePoint(pointGrid)
     {
         var foundPoint = false;
@@ -105,30 +151,50 @@ function BattleshipUtiity()
             
     }
     
+    /**
+     * This method determines randomly a viable Points path for a Ship object in
+     * either an Up, Left, Down, or Right direction on the Point grid within certain constraints.
+     * 
+     * @param {Point[][]} pointGrid A 2D Point Array
+     * @param {Point} sourcePoint The source Point of the Points path for a Ship
+     * @param {number} minLength The minimum length of a Ship
+     * @param {number} maxLength The maximum length of a Ship
+     * @return {Point[]} A Point Array represents the Points path for a Ship
+     */
     function pointsPath(pointGrid, sourcePoint, minLength, maxLength)
     {
-        //0 Up, 1 Left, 2 Down, 3 Right
-        var directions = [-1,-1,1,1];
         var points = [];
         var foundPath = false;
-        for(var directionIndex = 0; directionIndex < directions.length; directionIndex++)
+        var directionIndiceSet = directionIndexPermutations[permutationIndex];
+        for(var directionIndex = 0; directionIndex < directionIndiceSet.length; directionIndex++)
         {
-            var directionIncrement = directions[directionIndex];
-            if(directionIndex === 1 || directionIndex == 3)
+            var index = directionIndiceSet[directionIndex];
+            var directionIncrement = directions[index];
+            //1 is Left and 3 is Right
+            if(index === 1 || index == 3)
             {
                 points = traverseGridRow(pointGrid, sourcePoint, minLength, maxLength, directionIncrement);
             }
+            //else it's 0 which is Up or 2 which is Down
             else
             {
                 points = traverseGridColumn(pointGrid, sourcePoint, minLength, maxLength, directionIncrement);   
             }
             
+            //Check to see if a path of points for the Ship was found
             if(points !== undefined)
             {
                 foundPath = true;
                 break;
             }
         }
+        
+        permutationIndex++;
+        if(permutationIndex === directionIndexPermutations.length)
+        {
+            permutationIndex = 0;
+        }
+        
         if(foundPath === true)
         {
             return points;
@@ -136,6 +202,16 @@ function BattleshipUtiity()
         return undefined;
     }
     
+    /**
+     * This method traverse the elements at specific index/column of the nested Point Arrays
+     * to create a path of Points for a Ship if possible.
+     * 
+     * @param {Point[][]} pointGrid A 2D Point Array
+     * @param {Point} sourcePoint A source Point for the Points path of a Ship
+     * @param {number} minLength The minimum length of a Ship
+     * @param {number} maxLength The maximum length of a Ship
+     * @return {Point[]} A Point Array represents the Points path for a Ship
+     */
     function traverseGridColumn(pointGrid, sourcePoint, minLength, maxLength, directionIncrement)
     {
         var rowIndex = sourcePoint.getRow();
@@ -180,6 +256,16 @@ function BattleshipUtiity()
         return undefined;
     }
     
+    /**
+     * This method traverse the elements of specific row(nested Point Array)
+     * to create a path of Points for a Ship if possible.
+     * 
+     * @param {Point[][]} pointGrid A 2D Point Array
+     * @param {Point} sourcePoint A source Point for the Points path of a Ship
+     * @param {number} minLength The minimum length of a Ship
+     * @param {number} maxLength The maximum length of a Ship
+     * @return {Point[]} A Point Array represents the Points path for a Ship
+     */
     function traverseGridRow(pointGrid, sourcePoint, minLength, maxLength, directionIncrement)
     {
         var rowIndex = sourcePoint.getRow();
