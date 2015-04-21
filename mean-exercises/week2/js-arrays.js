@@ -96,6 +96,7 @@ function reverseString(string)
         
         return charArray.join("");
     }
+    else
     {
         return string;
     }
