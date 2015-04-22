@@ -1,5 +1,7 @@
 var inputReader = require('readline-sync');
-
+var intervalID = undefined;
+var timeoutID = undefined;
+var lastTime = undefined;
 function Monster(name,type,health)
 {
     var responses  = ['Feed','Pet','Kick'];
@@ -58,18 +60,9 @@ function driver()
     console.log("Your monster is a " + monsterType + "!");
     var monsterName = inputReader.question("What would you like to call it? ");
     var monster = new Monster(monsterName,monsterType);
-    var intervalID = setInterval(respondToMonsterStatus(monster),5000);
-    var monsterNotDead = true;
-    while(monsterNotDead)
-    {
-        if(monster.health <= 0)
-        {
-            monsterNotDead = false;
-            clearInterval(intervalID);
-        }
-    }
-    console.log("You monster " + monster.name + " DIEEEEEEEEEEEED!!!");
-    
+    //timeoutID = setTimeout(respondToMonsterStatus,5000,monster);
+    lastTime = new Date();
+    intervalID = setInterval(respondToMonsterStatus,5000,monster);
 }
 
 function getRandomMonsterType()
@@ -79,14 +72,27 @@ function getRandomMonsterType()
     return monsterType;
 }
 
-
 function respondToMonsterStatus(monster)
 {
     monster.decreaseHealth();
-    console.log("Your monster " + monster.name + " has " + monster.health + " health!");
-    console.log(monster.name + " " + monster.getStatus());
-    console.log(monster.availableReponses());
-    var chosenResponseIndex = parseInt(inputReader.question("Please enter a number corresponding to the response you want -> "));
-    monster.reactToResponse(chosenResponseIndex);
+    if(monster.health <= 0)
+    {
+        clearInterval(intervalID);
+        //clearTimeout(timeoutID);
+        console.log("You monster " + monster.name + " DIEEEEEEEEEEEED!!!");
+    }
+     else
+    {
+        var tmp = new Date();
+        console.log(tmp.getTime() - lastTime.getTime());
+        lastTime = tmp;
+        console.log("Your monster " + monster.name + " has " + monster.health + " health!");
+        console.log(monster.name + " " + monster.getStatus());
+        console.log(monster.availableReponses());
+        var chosenResponseIndex = parseInt(inputReader.question("Please enter a number corresponding to the response you want -> "));
+        monster.reactToResponse(chosenResponseIndex);
+        //timeoutID = setTimeout(respondToMonsterStatus,5000,monster);
+    }
+
 }
 driver();
