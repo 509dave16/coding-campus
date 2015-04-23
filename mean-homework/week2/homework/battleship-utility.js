@@ -132,15 +132,15 @@ function BattleshipUtiity()
     function randomSourcePoint(pointGrid)
     {
         var foundPoint = false;
-        var maxRows = pointGrid.length - 1;
-        var maxColumns= pointGrid[0].length - 1;
+        var maxRows = pointGrid.length;
+        var maxColumns= pointGrid[0].length;
         var randomRow = -1;
         var randomColumn = -1;
         var point = undefined;
         while(foundPoint === false)
         {
-            randomRow = Math.round(Math.random() * maxRows);
-            randomColumn = Math.round(Math.random() * maxColumns);
+            randomRow = Math.floor(Math.random() * maxRows);
+            randomColumn = Math.floor(Math.random() * maxColumns);
             point = pointGrid[randomRow][randomColumn];
             if(point.hasShip() === false)
             {
