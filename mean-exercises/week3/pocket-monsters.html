@@ -38,10 +38,10 @@
                 this.reactToResponse = function(responseIndex)
                 {
                     var react = "Yaaaaaaaay";
-                    if((responseIndex-1) === statusIndex)
+                    var index = (responseIndex-1);
+                    if( index === statusIndex)
                     {
                         this.health = 100;
-                        
                     }
                     else
                     {
@@ -117,7 +117,7 @@
             }
             function resolveResponse()
             {
-                var chosenResponseIndex = parseInt(document.getElementById('user-input').getAttribute("value"));
+                var chosenResponseIndex = parseInt(document.getElementById('user-input').value);
                 var reaction = monster.reactToResponse(chosenResponseIndex);
                 document.getElementById('user-input').value = "";
                 document.getElementById('prompt-message').innerHTML = reaction;
