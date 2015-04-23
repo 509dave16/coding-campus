@@ -28,6 +28,7 @@ function Monster(name,type,health)
         if((responseIndex-1) === statusIndex)
         {
             this.health = 100;
+            console.log("Yaaaaaaay");
         }
         else
         {
@@ -68,7 +69,7 @@ function driver()
 function getRandomMonsterType()
 {
     var monsterTypes = ['Furry Monster','Slimey Monster','Stinky Monster','Spiky Monster','Bouncy Monster'];
-    var monsterType = monsterTypes[Math.round(Math.random() * 5)];
+    var monsterType = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
     return monsterType;
 }
 
@@ -83,9 +84,7 @@ function respondToMonsterStatus(monster)
     }
      else
     {
-        var tmp = new Date();
-        console.log(tmp.getTime() - lastTime.getTime());
-        lastTime = tmp;
+
         console.log("Your monster " + monster.name + " has " + monster.health + " health!");
         console.log(monster.name + " " + monster.getStatus());
         console.log(monster.availableReponses());

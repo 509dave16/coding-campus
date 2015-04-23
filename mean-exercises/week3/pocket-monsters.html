@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            .form
+            {
+                font-family : "Times";
+            }
+            h1
+            {
+                font-family : "Lato";
+            }
+        </style>
+        <script type="text/javascript">
+            var monster = undefined;
+            function Monster(type,name,health)
+            {
+                var responses  = ['Feed','Pet','Kick'];
+                var status = ['is hungry','feels neglected','soiled the furniture'];
+                var statusIndex = -1;
+                this.name = name === undefined ? "No Name" : name;
+                this.type = type === undefined ? "No Type" : type;
+                this.health = health === undefined ? 100 : health;
+               
+                
+                this.getStatus = function()
+                {
+                    statusIndex = Math.floor(Math.random() * responses.length);
+                    return status[statusIndex];
+                };
+                
+                this.decreaseHealth = function(decrement)
+                {
+                    this.health -= decrement === undefined ? 10 : decrement;
+                };
+                
+                this.reactToResponse = function(responseIndex)
+                {
+                    var react = "Yaaaaaaaay";
+                    if((responseIndex-1) === statusIndex)
+                    {
+                        this.health = 100;
+                        
+                    }
+                    else
+                    {
+                        react = "Waaaaaaahhh";
+                    }
+                    return react;
+                };
+                
+                this.availableReponses = function()
+                {
+                    var output = "";
+                    for(var index = 0; index < responses.length; index++)
+                    {
+                        var value = responses[index];
+                        output += (index+1) + ". " + value + " " + this.name;
+                        if(index !== responses.length - 1)
+                        {
+                            output += "<br>";
+                        }
+                    }
+                    return output;
+                };
+            }
+
+            function start()
+            {
+                //Set type and health
+                var monsterType = getRandomMonsterType();
+                monster = new Monster(monsterType);
+                //Setup prompt for name
+                document.getElementById('prompt-message').innerHTML = "Your monster is a " + monsterType + "!<br>What would you like to call it?";
+                document.getElementById('submit-input').setAttribute("onclick","storeMonsterName()");
+                document.getElementById('submit-input').setAttribute("value","Submit");
+            }
+            function getRandomMonsterType()
+            {
+                var monsterTypes = ['Furry Monster','Slimey Monster','Stinky Monster','Spiky Monster','Bouncy Monster'];
+                var monsterType = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
+                return monsterType;
+            }
+            function storeMonsterName()
+            {
+                var name = document.getElementById('user-input').value;
+                monster.name = name;
+                document.getElementById('user-input').value = "";
+                document.getElementById('submit-input').setAttribute("onclick","");        
+                delayCallback();
+            }
+            function delayCallback()
+            {
+                setTimeout(respondToMonsterStatus,2000);
+            }
+            function respondToMonsterStatus()
+            {
+                monster.decreaseHealth();
+                if(monster.health <= 0)
+                {
+                    document.getElementById('prompt-message').innerHTML ="Your monster " + monster.name + " DIEEEEEEEEEEEED!!!";
+                    document.getElementById('submit-input').setAttribute("onclick","reset()");
+                    document.getElementById('submit-input').setAttribute("value","Reset");
+                }
+                 else
+                {
+
+                    var prompt = "Your monster " + monster.name + " has " + monster.health + " health!<br>";
+                    prompt += monster.name + " " + monster.getStatus() + "<br>";
+                    prompt += monster.availableReponses() + "<br>" + "Please enter a number corresponding to the response you want and click 'Submit'.";
+                    document.getElementById('prompt-message').innerHTML = prompt;
+                    document.getElementById('submit-input').setAttribute("onclick","resolveResponse()");
+                    document.getElementById('submit-input').setAttribute("value","Respond");
+                }
+            
+            }
+            function resolveResponse()
+            {
+                var chosenResponseIndex = parseInt(document.getElementById('user-input').getAttribute("value"));
+                var reaction = monster.reactToResponse(chosenResponseIndex);
+                document.getElementById('user-input').value = "";
+                document.getElementById('prompt-message').innerHTML = reaction;
+                document.getElementById('submit-input').setAttribute("onclick","");
+                delayCallback();
+            }
+            
+            function reset()
+            {
+                document.getElementById('prompt-message').innerHTML = "Please press the 'Start' button to begin the game!";
+                document.getElementById('submit-input').setAttribute("onclick","start()");
+                document.getElementById('submit-input').setAttribute("value","Start");
+            }
+        </script>
+
+    </head>
+    <h1>Pocket Monsters</h1>
+    <body>
+        <table class="form">
+            <tr>
+                <div id="prompt-message">Please press the 'Start' button to begin the game!</div>
+            </tr>
+            <tr>
+                <td><input type="text" id="user-input"/> </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" id="submit-input" value="Start" onclick="start()"/>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
