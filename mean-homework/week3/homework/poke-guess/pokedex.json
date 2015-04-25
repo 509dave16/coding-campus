@@ -1,0 +1,22 @@
+[
+    {"name":"Beedrill","imgPath":"assets\/img\/Beedrill.png"},
+    {"name":"Blastoise","imgPath":"assets\/img\/Blastoise.png"},
+    {"name":"Bulbasaur","imgPath":"assets\/img\/Bulbasaur.png"},
+    {"name":"Butterfree.png","imgPath":"assets\/img\/Butterfree.png"},
+    {"name":"Caterpie","imgPath":"assets\/img\/Caterpie.png"},
+    {"name":"Charizard","imgPath":"assets\/img\/Charizard.png"},
+    {"name":"Charmander","imgPath":"assets\/img\/Charmander.png"},
+    {"name":"Charmeleon","imgPath":"assets\/img\/Charmeleon.png"},
+    {"name":"Ivysaur","imgPath":"assets\/img\/Ivysaur.png"},
+    {"name":"Kakuna","imgPath":"assets\/img\/Kakuna.png"},
+    {"name":"Metapod","imgPath":"assets\/img\/Metapod.png"},
+    {"name":"Pidgeot","imgPath":"assets\/img\/Pidgeot.png"},
+    {"name":"Pidgeotto","imgPath":"assets\/img\/Pidgeotto.png"},
+    {"name":"Pidgey","imgPath":"assets\/img\/Pidgey.png"},
+    {"name":"Raticate","imgPath":"assets\/img\/Raticate.png"},
+    {"name":"Rattata","imgPath":"assets\/img\/Rattata.png"},
+    {"name":"Squirtle","imgPath":"assets\/img\/Squirtle.png"},
+    {"name":"Venusaur","imgPath":"assets\/img\/Venusaur.png"},
+    {"name":"Wartortle","imgPath":"assets\/img\/Wartortle.png"},
+    {"name":"Weedle","imgPath":"assets\/img\/Weedle"}
+]
