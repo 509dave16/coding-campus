@@ -1,6 +1,6 @@
-function  Pokemon(name,imagePath)
+function  Pokemon(name,imgPath)
 {
     this.name = name;
-    this.imagePath = imagePath;
+    this.imgPath = imgPath;
     this.hasBeenGuessed = false;    
 }
