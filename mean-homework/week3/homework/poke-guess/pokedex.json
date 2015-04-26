@@ -2,7 +2,7 @@
     {"name":"Beedrill","imgPath":"assets\/img\/Beedrill.png"},
     {"name":"Blastoise","imgPath":"assets\/img\/Blastoise.png"},
     {"name":"Bulbasaur","imgPath":"assets\/img\/Bulbasaur.png"},
-    {"name":"Butterfree.png","imgPath":"assets\/img\/Butterfree.png"},
+    {"name":"Butterfree","imgPath":"assets\/img\/Butterfree.png"},
     {"name":"Caterpie","imgPath":"assets\/img\/Caterpie.png"},
     {"name":"Charizard","imgPath":"assets\/img\/Charizard.png"},
     {"name":"Charmander","imgPath":"assets\/img\/Charmander.png"},
@@ -18,5 +18,5 @@
     {"name":"Squirtle","imgPath":"assets\/img\/Squirtle.png"},
     {"name":"Venusaur","imgPath":"assets\/img\/Venusaur.png"},
     {"name":"Wartortle","imgPath":"assets\/img\/Wartortle.png"},
-    {"name":"Weedle","imgPath":"assets\/img\/Weedle"}
+    {"name":"Weedle","imgPath":"assets\/img\/Weedle.png"}
 ]
