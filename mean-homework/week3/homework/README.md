@@ -25,3 +25,9 @@ Initially the user has no scores, so all the Pokeballs are greyed out. When a us
 ![Pokemon Strikes Image](./readme-images/strikes.png?raw=true "Poke Guess Strikes")
 
 The Pokemon above that will signify a strike will appear from the left, one for every time an incorrect guess is made or the timer reaches 0. Once 3 of the above Pokemon have been displayed, an alert will be displayed indicating that the user lost.
+
+##Issues
+Audio that triggers for correct guesses or incorrect guesses after a submission will sometimes not fire. The HTML Audio DOM Object was meant for streaming Audio. If I did an implementation of the AudioBuffer interface, I could possibly emulate one shot sounds.
+
+##Requirements
+Google Chrome
