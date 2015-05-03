@@ -20,7 +20,6 @@ function PokeGuess()
     var pokedex = [];
     var currentPokemon = undefined;
 
-    
     $.getJSON( "pokedex.json", function( data ) 
     {
         data.forEach(
@@ -181,6 +180,13 @@ function PokeGuess()
             {
                 timerID = setTimeout(timer,delay);
             }
+        }
+    );
+    
+    $("#pokemon-image").click(
+        function(event)
+        {
+            console.log("We made it!");
         }
     );
 }
