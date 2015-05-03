@@ -4,7 +4,7 @@ angular.module('longboard-crud-app',[])
     
     var onError = function(reason)
     {
-      scope.error = "Could not fetch the longboard from the Longboard API !";
+      scope.error = "Could not fetch the longboards from the Longboard API !";
     };
     
     var getLongboards = function()
