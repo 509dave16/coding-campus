@@ -1,0 +1,54 @@
+---
+name: home
+url: /
+animationIn: zoomIn
+---
+
+<h1>Task Manager</h1>
+<div ng-controller="MainController as main">
+    <div class="grid-block align-center small-up-1 medium-up-3 large-up-6">
+        <div class="vertical grid-block" ng-repeat="longboard in main.longboards">
+            <div class="grid-content">
+                <img class="img-thumbnail" src="{{longboard.bottom_img_url}}" />
+            </div>
+            <div class="grid-content">
+                <ul>
+                    <li>Name : {{longboard.name}}</li>
+                    <li> Length: {{longboard.length}}</li>
+                    <li>Style : {{longboard.style}}</li>
+                    <li>Price : {{longboard.price | currency}}</li>
+                </ul>
+            </div>
+                <div class="grid-container">
+                    <a zf-open="{{ 'longboardModal' + $index }}" class="button small-5 medium-5 large-5">Edit</a>
+                    <a  class="button small-5 medium-5 large-5" ng-click="main.deleteLongboard($index)">Delete</a>
+                </div>
+            <div zf-modal="" class='large' id="{{ 'longboardModal' + $index }}">
+                 <a zf-close="{{ 'longboardModal' + $index }}" class="close-button" ng-click="main.updateLongboard(longboard)">×</a>
+                 <form>
+                    <div class="vertical grid-block">
+                        <div class="grid-content">
+                            <label>
+                                Name
+                                <input type="text" ng-model="longboard.name" placeholder="{{ longboard.name }}"/>
+                            </label>
+                            <label>
+                                Length
+                                <input type="text" ng-model="longboard.length" placeholder="{{ longboard.length }}"/>
+                            </label>
+                            <label>
+                                Style
+                                <input type="text" ng-model="longboard.style" placeholder="{{ longboard.style }}"/>
+                            </label>
+                            <label>
+                                Price
+                                <input type="text" ng-model="longboard.price" placeholder="{{ longboard.price | currency }}"/>
+                            </label>
+                        </div><!--End Grid Content-->
+                    </div><!--End Grid Block-->
+                 </form><!--End Form-->
+            </div><!--End Modal-->
+        </div>
+    </div>
+    
+</div>
