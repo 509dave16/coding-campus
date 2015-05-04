@@ -61,7 +61,7 @@ url: /
                     </ul>
                 </div>
                 <div class="grid-content">
-                    <a zf-open="{{ 'updateLongboardModal' + $index }}" class="button small-5 medium-5 large-5">Edit</a>
+                    <a zf-open="{{ 'updateLongboardModal' + $index }}" class="button small-5 medium-5 large-5" ng-click="main.copyLongboard($index)">Edit</a>
                     <a  class="button small-5 medium-5 large-5" ng-click="main.deleteLongboard($index)">Delete</a>
                 </div>
                 <div zf-modal="" class='large' id="{{ 'updateLongboardModal' + $index }}">
@@ -71,23 +71,23 @@ url: /
                             <div class="grid-content">
                                 <label>
                                     Name
-                                    <input type="text" ng-model="updateLongboard.name" placeholder="{{ longboard.name }}"/>
+                                    <input type="text" ng-model="longboard.name" placeholder=""/>
                                 </label>
                                 <label>
                                     Brand
-                                    <input type="text" ng-model="updateLongboard.brand" placeholder="{{ longboard.brand }}"/>
+                                    <input type="text" ng-model="longboard.brand" placeholder=""/>
                                 </label>
                                 <label>
                                     Length
-                                    <input type="text" ng-model="updateLongboard.length" placeholder="{{ longboard.length }}"/>
+                                    <input type="text" ng-model="longboard.length" placeholder=""/>
                                 </label>
                                 <label>
                                     Style
-                                    <input type="text" ng-model="updateLongboard.style" placeholder="{{ longboard.style }}"/>
+                                    <input type="text" ng-model="longboard.style" placeholder=""/>
                                 </label>
                                 <label>
                                     Price
-                                    <input type="text" ng-model="updateLongboard.price" placeholder="{{ longboard.price }}"/>
+                                    <input type="text" ng-model="longboard.price" placeholder=""/>
                                 </label>
                             </div><!--End Grid Content-->
                         </div><!--End Grid Block-->

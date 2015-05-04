@@ -26,8 +26,6 @@
     });
 
     $locationProvider.hashPrefix('!');
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }
 
   function run() {
@@ -36,9 +34,6 @@
 
   function mainController($http) 
   {
-/*    $http.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-    $http.defaults.headers.common['Access-Control-Allow-Methods'] = 'OPTIONS,GET,POST,PUT,DELETE';
-    $http.defaults.headers.common["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With";*/
     console.log($http);
     var scope = this;
     scope.apiUrl = "http://mean.codingcamp.us:8888/509Dave16/";
@@ -46,6 +41,7 @@
     scope.createLongboardImage = {brandName:"",bottomImage:"",topImage:""};
     scope.longboardCreate = {};
     scope.longboardUpdate = {};
+    scope.longboardUpdateIndex = -1;
     scope.longboardDelete = {};
     
     var onError = function(reason)
@@ -54,6 +50,24 @@
       console.log(reason);
     };
 
+    var onUpdateError = function(reason)
+    {
+        var longboard = scope.longboards[scope.longboardUpdateIndex];
+        for(var property in longboard)
+        {
+           longboard[property] = scope.longboardUpdate[property];
+        }
+    };
+
+    scope.copyLongboard = function(longboardIndex)
+    {
+        var longboard= scope.longboards[longboardIndex];
+        scope.updateLongboardIndex = longboardIndex;
+        for(var property in longboard)
+        {
+           scope.longboardUpdate[property] = longboard[property];
+        }
+    };
     //****************
     //only fire on load
     var getLongboards = function()
@@ -82,26 +96,29 @@
         );
     };
     //****************
-    
-    scope.updateLongboard = function(longboardIndex)
-    {
-        var id = longboard['_id'];
-        console.log(id);
-        $http.put(scope.apiUrl + "longboard/" + id, scope.updateLongboard ).then
+    scope.getLongboard = function(id)
+    {        
+        $http.get(scope.apiUrl + "longboard/" + id).then
         (
           function(response)
           {
-
-            console.log(response.data);
-            var longboard = scope.longboards[longboardIndex];
-            for(var property in scope.updateLongboard)
-            {
-               
-               longboard[property] = scope.updateLongboard[property];
-            }
-
+            scope.longboards.push(response.data);
           },
           onError
+        );
+    };
+    scope.updateLongboard = function(longboardIndex)
+    {
+        var longboard = scope.longboards[longboardIndex];
+        var id = longboard['_id'];
+        console.log(id);
+        $http.put(scope.apiUrl + "longboard/" + id, longboard ).then
+        (
+          function(response)
+          {
+            console.log(response.data);
+          },
+          onUpdateError
         );
     };
 
@@ -127,12 +144,14 @@
     {
         scope.longboardCreate.bottom_img_url = scope.createLongboardImage.bottomImage;
         scope.longboardCreate.top_img_url = scope.createLongboardImage.topImage;
+        console.log(scope.longboardCreate);
+
         $http.post(scope.apiUrl + "longboard", scope.longboardCreate ).then
         (
           function(response)
           {
             console.log(response.data);
-            scope.longboards.push(response.data);
+            scope.getLongboard(response.data['_id']);
           },
           onError
         );
