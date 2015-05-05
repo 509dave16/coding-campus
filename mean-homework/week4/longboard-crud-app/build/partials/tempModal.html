@@ -1,0 +1,36 @@
+<div class="vertical grid-block">
+    <div class="grid-container">
+        <form>
+            <label>
+                Name
+                <input type="text" ng-model="main.tempLongboard.name" />
+            </label>
+            <label>
+                Brand
+                <input type="text" ng-model="main.tempLongboard.brand" />
+            </label>
+            <label>
+                Length
+                <input type="text" ng-model="main.tempLongboard.length" />
+            </label>
+            <label>
+                Style
+                <input type="text" ng-model="main.tempLongboard.style" />
+            </label>
+            <label>
+                Price
+                <input type="text" ng-model="main.tempLongboard.price" />
+            </label>
+            <select ng-model="main.tempLongboardImage" ng-options="longboardImage.brandName for longboardImage in main.longboardImages">
+                <option value="">Choose a brand longboard image</option>
+            </select>
+            <div class='hide-for-small-only'>
+                <img ng-show="main.tempLongboardImage.bottomImage" ng-src="{{main.tempLongboardImage.bottomImage}}">
+                <img ng-show="main.tempLongboardImage.topImage" ng-src="{{main.tempLongboardImage.topImage}}">
+            </div>
+        </form>
+        <!--End Form-->
+    </div>
+    <!--End Grid Container-->
+</div>
+<!--End Grid Block-->

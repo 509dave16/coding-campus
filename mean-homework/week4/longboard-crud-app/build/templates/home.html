@@ -2,41 +2,9 @@
     <div class='grid-block align-right'>
         <a zf-open="createLongboardModal" class="button">Create</a>
     </div>
-    <div zf-modal="" class='large' id="createLongboardModal" class='collapse'>
+    <div zf-modal="" class='' id="createLongboardModal">
          <a zf-close="createLongboardModal" class="close-button" ng-click="main.createLongboard()">×</a>
-         <form>
-            <div class="grid-block vertical">
-                <div class="grid-content">
-                    <label>
-                        Name
-                        <input type="text" ng-model="main.longboardCreate.name" placeholder=""/>
-                    </label>
-                    <label>
-                        Brand
-                        <input type="text" ng-model="main.longboardCreate.brand" placeholder=""/>
-                    </label>
-                    <label>
-                        Length
-                        <input type="text" ng-model="main.longboardCreate.length" placeholder=""/>
-                    </label>
-                    <label>
-                        Style
-                        <input type="text" ng-model="main.longboardCreate.style" placeholder=""/>
-                    </label>
-                    <label>
-                        Price
-                        <input type="text" ng-model="main.longboardCreate.price" placeholder=""/>
-                    </label>
-                    <select ng-model="main.createLongboardImage" ng-options="longboardImage.brandName for longboardImage in main.longboardImages">
-                        <option>Choose a brand longboard image</option>
-                    </select>
-                </div><!--End Grid Content-->
-                <div class='grid-block'>
-                    <img ng-src = "{{main.createLongboardImage.bottomImage}}" class='grid-container'>
-                    <img ng-src = "{{main.createLongboardImage.topImage}}" class='grid-container'>
-                 </div>
-            </div><!--End Grid Block-->
-         </form><!--End Form-->
+         <div ng-include="" src="'partials/tempModal.html'"></div>
     </div><!-- End Create Longboard Modal -->
     <div class="grid-block align-center">
         <h1 class='grid-container'>Hillyard Longboard Shop</h1>
@@ -45,7 +13,7 @@
         <div class="vertical grid-block" ng-repeat="longboard in main.longboards">
             <div class="grid-container">
                 <div class="grid-content">
-                    <img class="img-thumbnail" src="{{longboard.bottom_img_url}}" />
+                    <img class="thumbnail" src="{{longboard.bottom_img_url}}" />
                 </div>
                 <div class="grid-content">
                     <ul>
@@ -57,42 +25,14 @@
                     </ul>
                 </div>
                 <div class="grid-content">
-                    <a zf-open="{{ 'updateLongboardModal' + $index }}" class="button small-5 medium-5 large-5" ng-click="main.copyLongboard($index)">Edit</a>
+                    <a zf-open="longboardModal" class="button small-5 medium-5 large-5" ng-click="main.copyLongboard($index)">Edit</a>
                     <a  class="button small-5 medium-5 large-5" ng-click="main.deleteLongboard($index)">Delete</a>
                 </div>
-                <div zf-modal="" class='large' id="{{ 'updateLongboardModal' + $index }}">
-                     <a zf-close="{{ 'updateLongboardModal' + $index }}" class="close-button" ng-click="main.updateLongboard($index)">×</a>
-                     <form>
-                        <div class="vertical grid-block">
-                            <div class="grid-content">
-                                <label>
-                                    Name
-                                    <input type="text" ng-model="longboard.name" placeholder=""/>
-                                </label>
-                                <label>
-                                    Brand
-                                    <input type="text" ng-model="longboard.brand" placeholder=""/>
-                                </label>
-                                <label>
-                                    Length
-                                    <input type="text" ng-model="longboard.length" placeholder=""/>
-                                </label>
-                                <label>
-                                    Style
-                                    <input type="text" ng-model="longboard.style" placeholder=""/>
-                                </label>
-                                <label>
-                                    Price
-                                    <input type="text" ng-model="longboard.price" placeholder=""/>
-                                </label>
-                            </div><!--End Grid Content-->
-                        </div><!--End Grid Block-->
-                     </form><!--End Form-->
-                </div><!--End Longboard Update Modal-->
             </div><!--End Grid Container-->
         </div><!--End Longboard Grid Block Card -->
     </div><!-- End Longboard Grid -->
-<!--     <div class="grid-block">
-        {{main.longboardImages}}
-    </div> -->
+    <div zf-modal="" class='' id="longboardModal">
+         <a zf-close="longboardModal" class="close-button" ng-click="main.updateLongboard()">×</a>
+         <div ng-include="" src="'partials/tempModal.html'"></div>
+    </div><!--End Longboard Update Modal-->
 </div><!-- End Main Controller Scope -->

@@ -26,12 +26,80 @@ app.get('/avengers',
     }
 );
 
-app.post('/uglykittens',
-    function(request, response)
+app.post('/uglykittens', function(request, response){
+    response.send('<img src="' + request.body.catUrl + '"/>');
+});
+
+var bounties = [];
+
+app.post("/bounty",
+    function(request,response)
     {
-        response.send('<img src="' + request.body.catUrl + '"/>');
+        var bounty = request.body;
+        bounties.push(bounty);
+        response.send("Bounty Added!");
+    }   
+);
+
+app.get("/bounties",
+    function(request,response)
+    {
+        response.send(bounties);
     }
 );
 
-app.listen(process.env.PORT, process.env.IP);
-console.log('Server running and listening on port' + process.env.IP + " and IP " + process.env.IP);
+app.delete("/bounty",
+    function(request, response)
+    {
+        var bountyToDelete = request.body;
+        var firstName = bountyToDelete.FirstName;
+        var lastName = bountyToDelete.LastName;
+        var orginalLength = bounties.length;
+        bounties = bounties.filter
+        (
+            function (bounty)
+            {
+                if(bounty.FirstName !== firstName || bounty.LastName !== lastName)
+                {
+                    return true;
+                }
+                return false;
+            }
+        );
+        response.send(bounties.length !== orginalLength ? "You deleted a bounty" : "Bounty did not exist");
+    }
+);
+
+app.put("/bounty",
+    function(request, response)
+    {
+        var bountyToUpdate = request.body;
+        var firstName = bountyToUpdate.FirstName;
+        var lastName = bountyToUpdate.LastName;
+        var bountiesUpdated = 0;
+        bounties = bounties.map
+        (
+            function (bounty)
+            {
+                if(bounty.FirstName == firstName && bounty.LastName == lastName)
+                {
+                    for(var property in bountyToUpdate)
+                    {
+                        bounty[property] = bountyToUpdate[property];
+                    }
+                    bountiesUpdated++;
+                }
+                return bounty;
+            }
+        );
+        response.send(bountiesUpdated + " bounties were updated!");
+    }
+);
+
+
+{
+
+}
+
+app.listen(8000);
+console.log('Server running and listening on port 8000');
