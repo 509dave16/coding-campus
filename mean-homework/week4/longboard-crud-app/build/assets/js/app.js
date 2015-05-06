@@ -55,7 +55,7 @@
       console.log(reason);
     };
 
-    function resetTemp()
+    scope.resetTempLongboard = function()
     {
         scope.tempLongboard = {};
         scope.tempLongboardImage = {};
@@ -109,12 +109,12 @@
             {
               var longboard = scope.longboards[scope.tempLongboardIndex];
               copyObjectProperties(scope.tempLongboard,longboard);
-              resetTemp();
+              scope.resetTempLongboard();
             },
             function(reason)//error
             {
               onError(reason);
-              resetTemp();
+              scope.resetTempLongboard();
             }
         );
         
@@ -146,12 +146,12 @@
           {
             console.log(response.data);
             scope.longboards.push(response.data);
-            resetTemp();
+            scope.resetTempLongboard();
           },
           function(reason)
           {
             onError(reason);
-            resetTemp();
+            scope.resetTempLongboard();
           }
         );
     }

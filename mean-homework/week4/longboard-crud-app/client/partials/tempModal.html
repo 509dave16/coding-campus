@@ -21,12 +21,20 @@
                 Price
                 <input type="text" ng-model="main.tempLongboard.price" />
             </label>
-            <select ng-model="main.tempLongboardImage" ng-options="longboardImage.brandName for longboardImage in main.longboardImages">
-                <option value="">Choose a brand longboard image</option>
-            </select>
-            <div class='hide-for-small-only'>
-                <img ng-show="main.tempLongboardImage.bottomImage" ng-src="{{main.tempLongboardImage.bottomImage}}">
-                <img ng-show="main.tempLongboardImage.topImage" ng-src="{{main.tempLongboardImage.topImage}}">
+            <div class="grid-block">
+                <select ng-model="main.tempLongboardImage" ng-options="longboardImage.brandName for longboardImage in main.longboardImages">
+                    <option value="">Choose a brand longboard image</option>
+                </select>
+                <a zf-open="imageViewer" class="button">Preview</a>
+            </div>
+            <div zf-modal="" id="imageViewer" overlay="false" overlay-close="false" class='dialog'>
+                <div class='grid-block align-center' >
+                    <img ng-src="{{main.tempLongboardImage.bottomImage}}" />
+                    <img ng-src="{{main.tempLongboardImage.topImage}}" />
+                </div>
+                <div class='grid-block align-center'>
+                    <a zf-close="imageViewer" class="button">Close</a>
+                </div>
             </div>
         </form>
         <!--End Form-->

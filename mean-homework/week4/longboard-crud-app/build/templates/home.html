@@ -3,8 +3,9 @@
         <a zf-open="createLongboardModal" class="button">Create</a>
     </div>
     <div zf-modal="" class='' id="createLongboardModal">
-         <a zf-close="createLongboardModal" class="close-button" ng-click="main.createLongboard()">×</a>
+         <a zf-close="createLongboardModal" class="close-button" ng-click="main.resetTempLongboard()">×</a>
          <div ng-include="" src="'partials/tempModal.html'"></div>
+         <div class="grid-block align-center"><a zf-close="createLongboardModal" class="button" ng-click="main.createLongboard()">Submit</a></div>
     </div><!-- End Create Longboard Modal -->
     <div class="grid-block align-center">
         <h1 class='grid-container'>Hillyard Longboard Shop</h1>
@@ -32,7 +33,8 @@
         </div><!--End Longboard Grid Block Card -->
     </div><!-- End Longboard Grid -->
     <div zf-modal="" class='' id="longboardModal">
-         <a zf-close="longboardModal" class="close-button" ng-click="main.updateLongboard()">×</a>
+         <a zf-close="longboardModal" class="close-button" ng-click="main.resetTempLongboard()">×</a>
          <div ng-include="" src="'partials/tempModal.html'"></div>
+         <div class="grid-block align-center"><a zf-close="longboardModal" class="button" ng-click="main.updateLongboard()">Submit</a></div>
     </div><!--End Longboard Update Modal-->
 </div><!-- End Main Controller Scope -->
