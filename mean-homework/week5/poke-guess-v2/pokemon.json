@@ -1,0 +1,102 @@
+[
+  {
+    "id": "524a3800-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Beedrill",
+    "imgPath": "assets/img/prod/pokemon-imgs/524a10f0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524b7081-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Blastoise",
+    "imgPath": "assets/img/prod/pokemon-imgs/524b7080-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524be5b1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Bulbasaur",
+    "imgPath": "assets/img/prod/pokemon-imgs/524be5b0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524c0cc1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Butterfree",
+    "imgPath": "assets/img/prod/pokemon-imgs/524c0cc0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524c33d1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Caterpie",
+    "imgPath": "assets/img/prod/pokemon-imgs/524c33d0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524c5ae1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Charizard",
+    "imgPath": "assets/img/prod/pokemon-imgs/524c5ae0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524c81f1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Charmander",
+    "imgPath": "assets/img/prod/pokemon-imgs/524c81f0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524ca900-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Charmeleon",
+    "imgPath": "assets/img/prod/pokemon-imgs/524c81f2-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524ca902-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Ivysaur",
+    "imgPath": "assets/img/prod/pokemon-imgs/524ca901-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524dba71-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Kakuna",
+    "imgPath": "assets/img/prod/pokemon-imgs/524dba70-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524de181-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Metapod",
+    "imgPath": "assets/img/prod/pokemon-imgs/524de180-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524e0891-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Pidgeot",
+    "imgPath": "assets/img/prod/pokemon-imgs/524e0890-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524e2fa1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Pidgeotto",
+    "imgPath": "assets/img/prod/pokemon-imgs/524e2fa0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524e56b1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Pidgey",
+    "imgPath": "assets/img/prod/pokemon-imgs/524e56b0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524e56b3-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Raticate",
+    "imgPath": "assets/img/prod/pokemon-imgs/524e56b2-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524e7dc1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Rattata",
+    "imgPath": "assets/img/prod/pokemon-imgs/524e7dc0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524ea4d1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Squirtle",
+    "imgPath": "assets/img/prod/pokemon-imgs/524ea4d0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524ea4d3-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Venusaur",
+    "imgPath": "assets/img/prod/pokemon-imgs/524ea4d2-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524ecbe1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Wartortle",
+    "imgPath": "assets/img/prod/pokemon-imgs/524ecbe0-f680-11e4-bcce-0b61e143ef6f.png"
+  },
+  {
+    "id": "524ef2f1-f680-11e4-bcce-0b61e143ef6f",
+    "name": "Weedle",
+    "imgPath": "assets/img/prod/pokemon-imgs/524ef2f0-f680-11e4-bcce-0b61e143ef6f.png"
+  }
+]

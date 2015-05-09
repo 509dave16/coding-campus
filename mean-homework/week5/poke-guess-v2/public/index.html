@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Poke Guess</title>
+	<script  src="assets/js/angular.js"></script>
+	<script  src="assets/js/poke-guess-api.js"></script>
+	<script  src="assets/js/poke-guess-app.js"></script>
+</head>
+<body ng-app="PokeGuessApp" ng-controller = "MainController as main">
+	<div ng-show="main.pokemonData">{{main.pokemonData}}</div>
+	<div ng-show="main.guessData">{{main.guessData}}</div>
+</body>
+</html>
