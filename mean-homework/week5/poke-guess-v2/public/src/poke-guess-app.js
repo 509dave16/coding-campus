@@ -4,9 +4,25 @@ angular.module("PokeGuessApp",['PokeGuessAPI'])
 function mainController(pokeGuessApi)
 {
 	var scope = this;
+	scope.guessedPokemon = [];
 	scope.pokemonData = undefined;
 	scope.guessData = undefined;
+	scope.testPokemonData = undefined;
+	scope.testGuessData = undefined;
+	var onGetRandomPokemonSuccess = function(data)
+	{
+		scope.pokemonData = data;			
+	};
+
+	var onError = function(error)
+	{
+		console.log(error);
+	};
 	//testApi(scope,pokeGuessApi);
+	pokeGuessApi.getRandomPokemon({"ids":[]})
+		.then(onGetRandomPokemonSuccess,onError);
+
+
 }
 
 function testApi(scope,pokeGuessApi)
@@ -16,12 +32,12 @@ function testApi(scope,pokeGuessApi)
 	(
 		function(data)
 		{
-			scope.pokemonData = data;
+			scope.testPokemonData = data;
 			console.log(data);
 		},
 		function(error)
 		{
-			scope.pokemonData = error;
+			scope.testPokemonData = error;
 			console.log(error);
 		}
 
@@ -38,12 +54,12 @@ function testApi(scope,pokeGuessApi)
 	(
 		function(data)
 		{
-			scope.guessData = data;
+			scope.testGuessData = data;
 			console.log(data);
 		},
 		function(error)
 		{
-			scope.guessData = error;
+			scope.testGuessData = error;
 			console.log(error);
 		}
 
