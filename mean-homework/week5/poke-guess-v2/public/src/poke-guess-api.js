@@ -3,9 +3,10 @@
   var pokeGuessApi = function($http)
   {
       var baseUrl = "http://localhost:4242/";
-      var getRandomPokemon = function(guessedPokemonIds)
+      var getRandomPokemon = function(guessedPokemon)
       {
-        return $http.post(baseUrl + "pokemon", guessedPokemonIds)
+        var reqData = {'ids':guessedPokemon};
+        return $http.post(baseUrl + "pokemon", reqData)
         .then
         (
             function(response)
@@ -15,9 +16,10 @@
         );
       };
       
-      var checkGuess = function(guessInfo)
+      var checkGuess = function(id,name)
       {
-        return $http.post(baseUrl + "guess", guessInfo)
+        var reqData = {'id':id,'name':name};
+        return $http.post(baseUrl + "guess", reqData)
         .then
         (
             function(response)

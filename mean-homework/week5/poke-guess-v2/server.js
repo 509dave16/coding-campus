@@ -19,7 +19,6 @@ if(process.argv[2] !== '0')
 
 var pokemonArray = jf.readFileSync( 'pokemon.json' );
 
-//console.log(__dirname);
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.post('/pokemon', retrievePokemon);
@@ -57,15 +56,11 @@ function resolveGuess(req,res)
 	var guessInfo = req.body;
 	var pokemon = findPokemon('id',guessInfo.id);
 	var isCorrectGuess = false;
-	// console.log('guessInfo:');
-	// console.log(guessInfo);
-	// console.log('pokemon: ');
-	// console.log(pokemon);
 	if(pokemon.name === guessInfo.name)
 	{
 		isCorrectGuess = true;
 	}
-	res.send({"isCorrect" : isCorrectGuess});
+	res.send({"isCorrectGuess" : isCorrectGuess});
 }
 
 function findPokemon(key, value)

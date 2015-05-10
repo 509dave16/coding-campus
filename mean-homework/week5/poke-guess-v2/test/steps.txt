@@ -25,8 +25,12 @@ X2) /guess
 --Front End
 X1) Server Up Static HTML page
 X2) Stub out HTML page and include assets
-3) Input section
-4) Pokemon Image
-5) Pokeball Images
-6) Strike Images
-7) Timer Content
+X3) Input section
+X4) Pokemon Image
+X5) Pokeball Images
+X6) Strike Images
+X7) Timer Content
+
+--Front End Logic
+X1)Timer
+2)Scores and Strikes
