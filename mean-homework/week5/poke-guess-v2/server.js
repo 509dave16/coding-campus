@@ -56,7 +56,7 @@ function resolveGuess(req,res)
 	var guessInfo = req.body;
 	var pokemon = findPokemon('id',guessInfo.id);
 	var isCorrectGuess = false;
-	if(pokemon.name === guessInfo.name)
+	if(pokemon.name.toLowerCase() === guessInfo.name.toLowerCase())
 	{
 		isCorrectGuess = true;
 	}

@@ -1,4 +1,4 @@
-angular.module("PokeGuessApp",['PokeGuessAPI','ngAudio'])
+angular.module("PokeGuessApp",['PokeGuessAPI','ngAudio','ngMaterial'])
 .controller('MainController', ['pokeGuessApi','ngAudio','$interval',mainController]);
 
 function mainController(pokeGuessApi,ngAudio,$interval)

@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Poke Guess</title>
-	<script  src="assets/js/angular.min.js"></script>
-	<script  src="assets/js/angular.audio.js"></script>
-	<script  src="src/poke-guess-api.js"></script>
-	<script  src="src/poke-guess-app.js"></script>
-</head>
-<body ng-app="PokeGuessApp" ng-controller = "MainController as main">
-	<!-- Space to display test data -->
-	<div ng-show="main.testPokemonData">{{main.testPokemonData}}</div>
-	<div ng-show="main.testGuessData">{{main.testGuessData}}</div>
-	<!-- Content -->
-	<form ng-hide="main.testPokemonData || main.testGuessData">
-		<label for="guess">Who's that Pokemon?</label><br>
-		<input type="text" ng-model="main.guess" placeholder="Enter pokemon name" id="guess"/>
-		<button type="button" ng-click="main.checkGuess()">Submit</button>
-		<div>
-			<img ng-src="{{main.pokemonData.imgPath}}" />
-		</div>
 
-		<img ng-repeat = "imgPath in main.scoreImgArray track by $index" ng-src="{{imgPath}}" />
-		<br>
-		<img ng-repeat = "imgPath in main.strikesImgArray track by $index" ng-src="{{imgPath}}" />
-		<br>
-		<h1>Time Remaining:</h1>
-		<h1>{{main.countdown}}</h1>
-		<h2>Enter the pokemon's name and press submit before the time runs out.</h2>
-	</form>
+<head>
+    <title>Poke Guess</title>
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css" type="text/css">
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+    <script src="./bower_components/angular-audio/app/angular.audio.js"></script>
+    <script src="src/poke-guess-api.js"></script>
+    <script src="src/poke-guess-app.js"></script>
+</head>
+
+<body ng-app="PokeGuessApp" ng-controller="MainController as main">
+    <!-- Space to display test data -->
+    <div ng-show="main.testPokemonData">{{main.testPokemonData}}</div>
+    <div ng-show="main.testGuessData">{{main.testGuessData}}</div>
+    <!-- Content -->
+    <div layout="column" ng-hide="main.testPokemonData || main.testGuessData">
+        <div layout="row">
+            <div layout="column" layout-align="center">
+                <label for="guess">Who's that Pokemon?</label>
+                <br>
+                <div layout="row">
+                    <input type="text" ng-model="main.guess" placeholder="Enter pokemon name" id="guess" />
+                    <button type="button" ng-click="main.checkGuess()">Submit</button>
+                </div>
+            </div>
+            <div layout="row" layout align="center">
+                <img ng-src="{{main.pokemonData.imgPath}}" />
+            </div>
+        </div>
+        <div layout="row">
+            <img ng-repeat="imgPath in main.scoreImgArray track by $index" ng-src="{{imgPath}}" />
+        </div>
+        <div layout="column" layout-align="center center">
+            <div layout="row">
+                <img ng-repeat="imgPath in main.strikesImgArray track by $index" img ng-src="{{imgPath}}" />
+            </div>
+            <span>Time Remaining:</span>
+            <span>{{main.countdown}}</span>
+            <span>Enter the pokemon's name and press submit before the time runs out.</span>
+        </div>
+    </div>
 </body>
+
 </html>
