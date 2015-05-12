@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "A sample app.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sample",
+    "app",
+    "node",
+    "express"
+  ],
+  "author": "509dave16",
+  "license": "ISC",
+  "dependencies": {
+    "b": "^2.0.1",
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
+    "mongodb": "^2.0.31",
+    "uuid": "^2.0.1"
+  }
+}
