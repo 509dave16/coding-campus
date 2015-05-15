@@ -1,0 +1,44 @@
+<div class="vertical grid-block">
+    <div class="grid-container">
+        <form>
+            <label>
+                Name
+                <input type="text" ng-model="main.tempLongboard.name" />
+            </label>
+            <label>
+                Brand
+                <input type="text" ng-model="main.tempLongboard.brand" />
+            </label>
+            <label>
+                Length
+                <input type="text" ng-model="main.tempLongboard.length" />
+            </label>
+            <label>
+                Style
+                <input type="text" ng-model="main.tempLongboard.style" />
+            </label>
+            <label>
+                Price
+                <input type="text" ng-model="main.tempLongboard.price" />
+            </label>
+            <div class="grid-block">
+                <select ng-model="main.tempLongboardImage" ng-options="longboardImage.brandName for longboardImage in main.longboardImages">
+                    <option value="">Choose a brand longboard image</option>
+                </select>
+                <a zf-open="imageViewer" class="button">Preview</a>
+            </div>
+            <div zf-modal="" id="imageViewer" overlay="false" overlay-close="false" class='dialog'>
+                <div class='grid-block align-center' >
+                    <img ng-src="{{main.tempLongboardImage.bottomImage}}" />
+                    <img ng-src="{{main.tempLongboardImage.topImage}}" />
+                </div>
+                <div class='grid-block align-center'>
+                    <a zf-close="imageViewer" class="button">Close</a>
+                </div>
+            </div>
+        </form>
+        <!--End Form-->
+    </div>
+    <!--End Grid Container-->
+</div>
+<!--End Grid Block-->
