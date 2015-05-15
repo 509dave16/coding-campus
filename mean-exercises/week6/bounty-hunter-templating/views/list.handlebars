@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>  
+<head>  
+  <title>{{title}}</title>
+
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+
+<body>  
+  <h1>{{title}}</h1>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Type</th>
+      <th>Living</th>
+      <th>Delete</th>
+    </tr>
+    {{#each bounties}}
+    <tr>
+      <td>{{this.firstName}} {{this.lastName}}</td>
+      <td>{{this.bountyAmt}}</td>
+      <td>{{this.type}}</td>
+      <td>{{#if this.living}}Yes{{else}}Not Necessarily{{/if}}</td>
+      <td><a href="bounty/delete/{{this._id}}">delete</a></td>
+    </tr> 
+    {{/each}}
+  </table>
+</body>  
+</html>
