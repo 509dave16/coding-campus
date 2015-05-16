@@ -13,22 +13,31 @@ router.get('/home', function (req, res) {
 });
 
 router.get('/popular', function (req, res) {  
-  
+  FavoriteSong.find({},
+  	function(error, favoriteSongs)
+  	{
+		  var popularSongs = favoriteSongs.sort(
+		  		function(a,b)
+		  		{
+		  			return b.popularity - a.popularity;
+		  		}
+		  );
+		  res.render('list', {tracks:popularSongs,title:"Popular"})
+  	}
+  );
 });
 
 router.get('/newest', function (req, res) {  
   FavoriteSong.find({},
   	function(error, favoriteSongs)
   	{
-  		  //console.log(favoriteSongs);
-		  //res.send('Newest Routes');
-		  var popularSongs = favoriteSongs.sort(
+		  var newestSongs = favoriteSongs.sort(
 		  		function(a,b)
 		  		{
 		  			return b.timestamp - a.timestamp;
 		  		}
 		  );
-		  res.render('list', {tracks:popularSongs,title:"Newest"})
+		  res.render('list', {tracks:newestSongs,title:"Newest"})
 
   	}
   );
