@@ -22,7 +22,7 @@ router.get('/popular', function (req, res) {
 		  			return b.popularity - a.popularity;
 		  		}
 		  );
-		  res.render('list', {tracks:popularSongs,title:"Popular"})
+		  res.render('list', {tracks:popularSongs,title:"Popular"});
   	}
   );
 });
@@ -37,14 +37,27 @@ router.get('/newest', function (req, res) {
 		  			return b.timestamp - a.timestamp;
 		  		}
 		  );
-		  res.render('list', {tracks:newestSongs,title:"Newest"})
-
+		  res.render('list', {tracks:newestSongs,title:"Newest"});
   	}
   );
 });
 
 router.get('/random', function (req, res) {  
-
+	FavoriteSong.find({},
+  	function(error, favoriteSongs)
+  	{
+		  var randomIndex = Math.floor(Math.random() * favoriteSongs.length);
+		  var randomSong = favoriteSongs[randomIndex];
+		  res.render('single', 
+		  	{
+		  	 track: randomSong.name,
+		  	 artist: randomSong.artist,
+		  	 popularity: randomSong.popularity,
+		  	 title:"Random"
+		  	}
+		  );
+  	}
+  );
 });
 
 router.post('/tracks', function (req, res){
