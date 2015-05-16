@@ -4,6 +4,9 @@ var FavoriteSong = require('./favorite-song.js');
 var router = express.Router();
 module.exports = exports = router;
 
+router.get('/', function (req, res) {  
+  res.redirect('/home');
+});
 
 router.get('/home', function (req, res) {  
   res.render('home', {title: "What's your favorite song?"});
@@ -14,19 +17,30 @@ router.get('/popular', function (req, res) {
 });
 
 router.get('/newest', function (req, res) {  
-  res.send('Newest Routes');
+  FavoriteSong.find({},
+  	function(error, favoriteSongs)
+  	{
+  		  //console.log(favoriteSongs);
+		  //res.send('Newest Routes');
+		  var popularSongs = favoriteSongs.sort(
+		  		function(a,b)
+		  		{
+		  			return b.timestamp - a.timestamp;
+		  		}
+		  );
+		  res.render('list', {tracks:popularSongs,title:"Newest"})
+
+  	}
+  );
 });
 
 router.get('/random', function (req, res) {  
-  
+
 });
 
 router.post('/tracks', function (req, res){
-	console.log(req.body);
 	var name = req.body.track_name;
 	var artist = req.body.artist_name;
-	console.log(name);
-	console.log(artist);
 	var where = {};
 	where.name = name;
 	where.artist = artist;
@@ -48,8 +62,6 @@ router.post('/tracks', function (req, res){
 				{
 					if(savedFavoriteSong)
 					{
-						console.log(savedFavoriteSong);
-						// res.render('',{});
 						res.send(savedFavoriteSong);
 					}
 				}
