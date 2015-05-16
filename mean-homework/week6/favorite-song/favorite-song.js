@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 var favoriteSongSchema = new Schema(
 	{
-		"trackName" : String,
+		"name" : String,
 		"artist" : String,
-		"submissionCount" : Number,
-		"timeStamp" : Date	
+		"popularity" : Number,
+		"timestamp" : Date	
 	}
 );
 
