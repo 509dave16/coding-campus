@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="SaleCloud">
+
+  <head>
+    <!-- Angular Material CSS now available via Google CDN; version 0.9.4 used here -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    
+       <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-cookies.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+
+    <!-- Angular Material Javascript now available via Google CDN; version 0.9.4 used here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css" />
+    
+    <script src="./js/services/angular-uuid.js"></script>
+    <script src="./js/services/key-service.js"></script>
+    <script src="./js/services/product-service.js"></script>
+    <script src="./js/services/cart-service.js"></script>
+    
+    <script src="./js/sale-cloud-app.js"></script>
+    <script src="./js/controllers/main-controller.js"></script>
+  </head>
+
+  <body ng-controller="MainCtrl as mainCtrl">
+    <h1>Cloud Sale</h1>
+    <div layout="row">
+      <div flex="70">
+        <div layout="row" layout-wrap>
+          <div ng-repeat="product in mainCtrl.products track by $index" flex-gt-lg='25' flex-lg='25' flex-md='50' flex-sm='100'>
+            <md-card>
+              <img ng-src="{{product.image}}" />
+              <md-card-content>
+                <h4>{{product.name}}</h4>
+                <p>{{product.price | currency}}</p>
+                <p>Condition: {{product.condition}}</p>
+                <p>{{product.description}}</p>
+              </md-card-content>
+              <div class='md-actions' layout="row" layout-align="end center">
+                <md-button ng-click="mainCtrl.addToCart(product)">add to cart</md-button>
+              </div>
+            </md-card>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="20">
+         <div layout="column">
+          <h2>Cart</h2>
+          <div ng-repeat="cartProduct in mainCtrl.cartProducts track by $index">
+            <md-card>
+              <img ng-src="{{cartProduct.image}}" />
+              <md-card-content>
+                <h4>{{cartProduct.name}}</h4>
+                <p>{{cartProduct.price | currency}}</p>
+                <p>{{mainCtrl.getItemQuantity(cartProduct)}}</p>
+              </md-card-content>
+              <div class='md-actions' layout="row" layout-align="end center">
+                <md-button ng-click="mainCtrl.removeFromCart(cartProduct)">Remove</md-button>
+              </div>
+            </md-card>
+          </div>
+          <div ng-show="subtotal=mainCtrl.subtotal()">
+            <strong>Subtotal: {{subtotal | currency}}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

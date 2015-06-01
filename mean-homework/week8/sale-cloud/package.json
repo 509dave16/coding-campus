@@ -1,0 +1,22 @@
+{
+  "name": "sale-cloud",
+  "version": "1.0.0",
+  "description": "An app where all my old toys are being sold!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "sale",
+    "cloud",
+    "angular",
+    "http",
+    "material"
+  ],
+  "author": "509Dave16",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.4"
+  }
+}
