@@ -1,1 +1,0 @@
-  <div ng-include="" src="'partials/tempModal.html'"></div>

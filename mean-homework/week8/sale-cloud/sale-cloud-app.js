@@ -1,1 +1,0 @@
-angular.module('SaleCloud',['CartService','ProductService','KeyService','ngMaterial']);
