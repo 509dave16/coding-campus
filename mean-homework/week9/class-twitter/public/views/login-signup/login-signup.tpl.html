@@ -1,0 +1,8 @@
+<form>
+    <input type="text" placeholder="Enter username here..." ng-model="loginSignupCtrl.username" />
+    <input type="text" placeholder="Enter password here..." ng-model="loginSignupCtrl.password" />
+    <button ng-click="loginSignupCtrl.login()">Login</button>
+    <button ng-click="loginSignupCtrl.signup()">Signup</button>
+</form>
+
+<h2 ng-show="loginSignupCtrl.errorStatus">{{loginSignupCtrl.errorStatus}}</h2>

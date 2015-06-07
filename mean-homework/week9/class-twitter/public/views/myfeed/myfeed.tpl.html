@@ -1,1 +1,5 @@
-<h1>This is My Feed</h1>
+<div ng-repeat="tweet in myFeedCtrl.tweets">
+    <a href="/#/myfeed/{{tweet.username}}">@{{tweet.username}}</a><br>
+    <span>{{tweet.text}}</span><br>
+    <span>{{tweet.time}}</span>
+</div>

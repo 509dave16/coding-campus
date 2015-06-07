@@ -1,23 +1,51 @@
-/**
- * Created by rise4031 on 6/6/15.
- */
-angular.module('class-twitter.myfeed',['ngRoute'])
+
+angular.module('class-twitter.myfeed',['ngRoute','class-twitter.service','loginService'])
     .config(config)
-    .controller('MyFeedCtrl',myFeedCtrl);
+    .controller('MyFeedCtrl',['$location','$routeParams','classTwitterService','loginService',myFeedCtrl]);
 
 function config($routeProvider)
 {
     $routeProvider
-        .when('/myfeed',
+        .when('/myfeed/:username?',
         {
             controller:"MyFeedCtrl",
-            templateUrl: "public/views/myfeed/myfeed.html",
+            templateUrl: "views/myfeed/myfeed.tpl.html",
             controllerAs:"myFeedCtrl"
-        }
-    )
-}
-
-function myFeedCtrl()
-{
+        });
 
 }
+
+function myFeedCtrl($location,$routeParams,classTwitterService, loginService) {
+    if(!classTwitterService.isAuthenticated())
+    {
+        loginService.goToLogin();
+    }
+    else
+    {
+        var onGetTweets = function(tweets)
+        {
+            scope.tweets = tweets;
+        };
+
+        var onError = function(error)
+        {
+
+        };
+        var scope = this;
+        scope.tweets = [];
+        scope.displayTweets = function () {
+            if ($routeParams.username) {
+                classTwitterService.getUserTweets($routeParams.username).then(onGetTweets, onError);
+            }
+            else {
+                classTwitterService.getAllTweets().then(onGetTweets, onError);
+            }
+
+        };
+        scope.displayTweets();
+
+
+    }
+}
+
+

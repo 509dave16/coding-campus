@@ -17,28 +17,27 @@ function config($routeProvider)
 function loginSignupCtrl($location,classTwitterService)
 {
     var scope = this;
-    scope.tweets = [];
-    scope.displayTweets = function()
-    {
-        if($routeParams.username)
-        {
-            classTwitterService.getUserTweets($routeParams.username).then(onGetTweets, onError);
-        }
-        else
-        {
-            classTwitterService.getAllTweets().then(onGetTweets, onError);
-        }
+    scope.username = "";
+    scope.password = "";
+    scope.errorStatus = "";
 
+    scope.login = function()
+    {
+      classTwitterService.login(scope.username,scope.password).then(onLoginSignup,onError);
     };
-    scope.displayTweets();
 
-    function onGetTweets(tweets)
+    scope.signup = function()
     {
-        scope.tweets = tweets;
+        classTwitterService.signup(scope.username,scope.password).then(onLoginSignup,onError);
+    };
+
+    function onLoginSignup(status)
+    {
+        $location.path('/myfeed');
     }
 
-    function onError(error)
+    function onError(status)
     {
-
+        scope.errorStatus = status;
     }
 }

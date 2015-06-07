@@ -10,7 +10,7 @@ angular.module('loginService',['ngRoute'])
         function Login()
         {
             this.goToLogin = function () {
-                $location.path(route);
+                $location.path(loginRoute);
             };
         }
         return new Login();

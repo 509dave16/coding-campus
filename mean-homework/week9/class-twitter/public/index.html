@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="class-twitter">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Class Twitter</title>
+    <!-- Angular Material CSS now available via Google CDN; version 0.9.7 used here -->
+    <link rel="stylesheet" href="components/bower_components/angular-material/angular-material.min.css">
+
+    <!-- Angular Material Dependencies -->
+    <script src="components/bower_components/angular/angular.min.js"></script>
+    <script src="components/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="components/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="components/bower_components/angular-aria/angular-aria.min.js"></script>
+
+    <!-- Angular Material Javascript now available via Google CDN; version 0.9.7 used here -->
+    <script src="components/bower_components/angular-material/angular-material.min.js"></script>
+
+
+    <script src="app.js"></script>
+    <script src="views/myfeed/myfeed-controller.js"></script>
+    <script src="views/myaccount/myaccount-controller.js"></script>
+    <script src="views/login-signup/login-signup-controller.js"></script>
+    <script src="components/custom_angular_services/class-twitter-service.js"></script>
+    <script src="components/custom_angular_services/login-service.js"></script>
+
 </head>
 <body>
-
+    <a href="/#/myfeed">My Feed</a>
+    <a href="/#/myaccount">My Account</a>
+    <ng-view></ng-view>
 </body>
 </html>

@@ -8,19 +8,19 @@ function config($routeProvider)
   var defaultRouteName = '/home';
   var defaultRouteObj = {
     controller: 'HomeCtrl',
-    templateUrl: 'home.tpl.html',
+    templateUrl: 'templates/home.tpl.html',
     controllerAs: 'homeCtrl'
   };
   $routeProvider
   .when(defaultRouteName,defaultRouteObj)
   .when('/about',{
     controller: 'AboutCtrl',
-    templateUrl: 'about.tpl.html',
+    templateUrl: 'templates/about.tpl.html',
     controllerAs: 'aboutCtrl'
   })
   .when('/whyilove', {
     controller: 'WhyILoveCtrl',
-    templateUrl: 'whyilove.tpl.html',
+    templateUrl: 'templates/whyilove.tpl.html',
     controllerAs: 'whyiloveCtrl'
   })
   .otherwise(defaultRouteName,defaultRouteObj);
